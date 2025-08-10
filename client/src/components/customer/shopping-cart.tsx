@@ -1,6 +1,7 @@
 import { useCart } from "@/hooks/use-cart";
 import { Button } from "@/components/ui/button";
 import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
+import CheckoutModal from "@/components/shared/checkout-modal";
 import { useState } from "react";
 
 export default function ShoppingCart() {
@@ -93,6 +94,12 @@ export default function ShoppingCart() {
           </div>
         )}
       </div>
+
+      {/* Checkout Modal */}
+      <CheckoutModal 
+        isOpen={showCheckout} 
+        onClose={() => setShowCheckout(false)} 
+      />
     </div>
   );
 }

@@ -8,8 +8,12 @@ import { apiRequest } from "@/lib/queryClient";
 import { CURRENT_USER_ID, PAYMENT_METHODS } from "@/lib/constants";
 import type { Address } from "@shared/schema";
 
-export default function CheckoutModal() {
-  const [isOpen, setIsOpen] = useState(false);
+interface CheckoutModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   const [paymentMethod, setPaymentMethod] = useState("wechat");
   const { state, totalPrice, clearCart } = useCart();
   const { toast } = useToast();
@@ -52,7 +56,7 @@ export default function CheckoutModal() {
         description: "订单已提交，请等待商家确认",
       });
       clearCart();
-      setIsOpen(false);
+      onClose();
       queryClient.invalidateQueries({ queryKey: ["/api/orders"] });
     },
     onError: () => {
@@ -97,7 +101,7 @@ export default function CheckoutModal() {
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-semibold text-gray-900">确认订单</h3>
             <button 
-              onClick={() => setIsOpen(false)}
+              onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-full"
             >
               <X className="h-5 w-5" />
