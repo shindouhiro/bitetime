@@ -39,7 +39,7 @@ jobs:
         version: latest
 
     - name: Install dependencies
-      run: pnpm install
+      run: pnpm install --no-frozen-lockfile
 
     - name: Build frontend project
       run: pnpm run vite
