@@ -3,15 +3,7 @@ name: Deploy Frontend (Client)
 on:
   push:
     branches: [ main, master ]
-    paths:
-      - 'client/**'
-      - 'package.json'
-      - 'vite.config.ts'
-      - 'tailwind.config.ts'
-  pull_request:
-    branches: [ main, master ]
-    paths:
-      - 'client/**'
+    
 
 env:
   REGISTRY: docker.io
